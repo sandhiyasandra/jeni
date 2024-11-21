@@ -1,0 +1,474 @@
+1hrs
+1 What is ReactJS?
+
+1 ReactJS is an open-source JavaScript library developed by Facebook for building user interfaces, particularly single-page applications where you can create reusable UI components. It allows developers to design complex UIs from small, isolated pieces of code called "components."
+
+Features of ReactJS
+1 Component-Based Architecture: React is all about components. This promotes reusability and makes it easier to maintain the code.
+
+2 JSX (JavaScript XML): React uses JSX, which allows you to write HTML-like syntax directly in your JavaScript code. It makes the code easier to read and write.
+
+3 Virtual DOM: React maintains a virtual representation of the DOM. When changes occur, React updates the virtual DOM first, and then reconciles it with the actual DOM, improving performance.
+
+4 Unidirectional Data Binding: Data flows in one direction, from parent to child, which makes the application easier to understand and debug.
+
+5 Lifecycle Methods: React components have lifecycle methods that can be used to run code at specific points in a component's life, such as when it mounts or updates.
+
+6 Hooks: React introduced hooks to allow functional components to manage state and side effects without needing class components.
+
+
+2 Creating Our First Function-Based Component
+
+import React from 'react'
+const First = () => {
+  return (
+    <div>First</div>
+  )
+}
+export default First
+
+3 Creating Our First Class-Based Component
+
+import React from 'react';
+
+class First extends React.Component {
+  render() {
+    return <h1>Hello, World!</h1>;
+  }
+}
+
+export default First;
+
+2hrs
+
+1 Introduction to JSX
+1 JSX (JavaScript XML) is a syntax extension for JavaScript that looks similar to HTML. 
+2 It allows you to write HTML elements and components in a JavaScript file, making it easier to create and visualize the structure of your UI. 
+3 JSX is not required to use React, but it’s widely adopted because of its readability and ease of use.
+
+2 Adding JSX to Your Website
+
+import React from 'react'
+const First = () => {
+  return (
+    <div>First</div>
+  )
+}
+export default First
+
+3 Using Dynamic Variables in JSX
+
+const name = 'John Doe';
+const App = () => {
+  return <h1>Hello, {name}!</h1>;
+};
+
+4 Create React App Using create-react-app Command
+
+npx create-react-app my-app
+
+cd my-app
+
+npm start
+
+5 Tree Reconciliation
+Tree reconciliation (or reconciliation) is the process by which React updates the DOM efficiently. When the state of an object changes, React must determine what changes have occurred so it can update the UI accordingly.
+
+Key Concepts
+1 Virtual DOM: React creates a virtual representation of the DOM. When changes are made, it first updates the virtual DOM, and then calculates the most efficient way to update the actual DOM.
+
+2 Diffing Algorithm: React uses a diffing algorithm to compare the previous virtual DOM with the new virtual DOM to determine what needs to be updated.
+
+3 Key Prop: When rendering lists of elements, using the key prop helps React identify which items have changed, are added, or are removed. This helps optimize the reconciliation process.
+
+2hrs
+
+1 Component
+In React, a component is a reusable piece of code that returns a React element. Components can be thought of as building blocks for your UI, and they can be classified into two main types: functional components and class components.
+
+2 Functional Component
+
+Functional Components are JavaScript functions that return React elements. They can receive props (short for properties) as an argument, which allows you to pass data from a parent component to a child component.
+
+Example: User Profile Component
+
+Step 1: Create the Functional Component
+
+import React from 'react';
+
+const UserProfile = ({ name, age, location }) => {
+  return (
+    <div>
+      <h2>User Profile</h2>
+      <p>Name: {name}</p>
+      <p>Age: {age}</p>
+      <p>Location: {location}</p>
+    </div>
+  );
+};
+
+export default UserProfile;
+
+Step 2: Using the Functional Component
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import UserProfile from './UserProfile'; // Adjust the path as necessary
+
+const App = () => {
+  return (
+    <div>
+      <h1>Welcome to the User Profiles</h1>
+      <UserProfile name="Alice" age={30} location="New York" />
+      <UserProfile name="Bob" age={25} location="San Francisco" />
+      <UserProfile name="Charlie" age={35} location="Chicago" />
+    </div>
+  );
+};
+
+export default App;
+
+3 Class Component 
+
+Class Components are ES6 classes that extend from React.Component. They also accept props, but they use this.props to access them.
+
+
+Example: Greeting Component
+
+import React, { Component } from 'react';
+
+class Greeting extends Component {
+  render() {
+    // Accessing props
+    const { name, age } = this.props;
+
+    return (
+      <div>
+        <h1>Hello, {name}!</h1>
+        <p>You are {age} years old.</p>
+      </div>
+    );
+  }
+}
+
+export default Greeting;
+
+Using the Greeting Component
+
+import React from 'react';
+import Greeting from './Greeting';
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <Greeting name="Alice" age={30} />
+        <Greeting name="Bob" age={25} />
+      </div>
+    );
+  }
+}
+
+export default App;
+
+4 Counter Component
+This component will manage the counter state and provide buttons to increment and reset the count.
+
+import React, { useState } from 'react';
+
+const Counter = () => {
+  const [count, setCount] = useState(0); // Initialize state with useState
+
+  const increment = () => {
+    setCount(prevCount => prevCount + 1); // Increment the count
+  };
+
+  const reset = () => {
+    setCount(0); // Reset the count to zero
+  };
+
+  return (
+    <div>
+      <h2>Current Count: {count}</h2>
+      <button onClick={increment}>Increment</button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
+};
+
+export default Counter;
+
+App Component
+This will be the main component that renders the Counter.
+
+import React from 'react';
+import Counter from './Counter';
+
+const App = () => {
+  return (
+    <div>
+      <h1>Counter App</h1>
+      <Counter />
+    </div>
+  );
+};
+
+export default App;
+
+2hrs
+
+operators
+
+import React, { useState } from 'react';
+
+const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
+
+  const toggleLogin = () => {
+    if (isLoggedIn) {
+      setIsLoggedIn(false);
+      setUsername(''); // Clear username on logout
+    } else {
+      const name = prompt('Enter your name:'); // Prompt for username
+      setUsername(name);
+      setIsLoggedIn(true);
+    }
+  };
+
+  return (
+    <div style={{ padding: '20px' }}>
+      <h1>{isLoggedIn ? 'Welcome, ' + username + '!' : 'Please log in.'}</h1>
+
+      {/* Short-circuiting for notifications */}
+      {isLoggedIn && <p>You have new notifications!</p>}
+
+      {/* Ternary operator for button text */}
+      <button onClick={toggleLogin}>
+        {isLoggedIn ? 'Log Out' : 'Log In'}
+      </button>
+    </div>
+  );
+};
+
+export default App;
+ 
+
+2hrs
+
+Handling Side-Effects
+
+Pure Functions: 
+	Always return the same output for the same input and have no side-effects.
+
+Copy code
+function add(a, b) {
+  return a + b; // No side-effects
+}
+
+Impure Functions: 
+	May return different outputs for the same inputs or modify external states.
+
+let count = 0;
+
+function increment() {
+  count += 1; // This modifies an external variable (count)
+}
+
+
+Handling side effect
+
+import React, { useState,useEffect } from 'react';
+const App = () => {
+  const [num1, setNum1] = useState(100);
+  const [num2, setNum2] = useState(100);
+  useEffect(() => {
+    setNum1(200);
+    console.log("use effect");
+    return ()=>{
+      setNum1(100);
+      console.log("memory cleaned");
+      
+    }
+  }, [num1,num2])
+  console.log("running",num1);
+  
+  return (
+    <div>
+      <h1>{num1}</h1>
+      <button onClick={()=>setNum1((a)=>a+1)}>Add</button>
+      <h1>{num2}</h1>
+      <button onClick={()=>setNum2((a)=>a+1)}>Add</button>
+    </div>
+  );
+};
+
+export default App;
+
+3hrs
+
+Introduction to Routing
+
+Routing in a web application allows you to navigate between different views or components based on the URL. 
+In React, the most popular library for routing is React Router.
+
+npm install react-router-dom
+
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './components/Home';
+import About from './components/About';
+import NotFound from './components/NotFound';
+import User from './components/User';
+import Dashboard from './components/Dashboard';
+
+const App = () => {
+  return (
+    <Router>
+      <div>
+        <h1>E-Commerce Application</h1>
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/user/1">User 1</Link>
+          <Link to="/dashboard">Dashboard</Link>
+        </nav>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/user/:userId" element={<User />} />
+          <Route path="/dashboard/*" element={<Dashboard />} />
+          <Route path="*" element={<NotFound />} /> {/* Handle non-existent pages */}
+        </Routes>
+      </div>
+    </Router>
+  );
+};
+
+export default App;
+
+Step 3: Create Page Components
+
+Home.js:
+
+import React from 'react';
+
+const Home = () => {
+  return <h2>Welcome to the Home Page</h2>;
+};
+
+export default Home;
+
+About.js:
+
+import React from 'react';
+
+const About = () => {
+  return <h2>About Us</h2>;
+};
+
+export default About;
+
+NotFound.js:
+
+import React from 'react';
+
+const NotFound = () => {
+  return <h2>404 - Page Not Found</h2>;
+};
+
+export default NotFound;
+
+useParams()
+
+The useParams() hook is a feature of React Router that allows you to access the parameters of the current route. It is used when you have dynamic segments in your route path, such as user IDs, product IDs, or any other identifier.
+
+User.js (with URL Params):
+
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+const User = () => {
+  const { userId } = useParams();
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
+      const data = await response.json();
+      setUserData(data);
+    };
+
+    fetchUser();
+  }, [userId]);
+
+  return userData ? <h2>User: {userData.name}</h2> : <p>Loading...</p>;
+};
+
+export default User;
+
+useLocation()
+
+   The useLocation() hook is part of the React Router library and is used to access the current location object in a React application. 
+   This hook allows you to get information about the current URL, which can be very useful for various routing-related tasks.
+
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+
+const CurrentLocation = () => {
+  // Get the current location
+  const location = useLocation();
+
+  return (
+    <div>
+      <h2>Current Location</h2>
+      <p>Pathname: {location.pathname}</p>
+    </div>
+  );
+};
+
+export default CurrentLocation;
+
+Index Routes
+
+import React from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import Overview from './Overview';
+import Stats from './Stats';
+import Settings from './Settings';
+
+const Dashboard = () => {
+  return (
+    <div>
+      <h2>Dashboard</h2>
+      <nav>
+        <Link to="overview">Overview</Link>
+        <Link to="stats">Stats</Link>
+        <Link to="settings">Settings</Link>
+      </nav>
+      <Routes>
+        <Route index element={<Overview />} /> {/* Default route */}
+        <Route path="stats" element={<Stats />} />
+        <Route path="settings" element={<Settings />} />
+      </Routes>
+    </div>
+  );
+};
+
+export default Dashboard;
+
+useNavigate()
+
+The useNavigate() hook is part of React Router and is used for programmatic navigation in your React application. 
+It allows you to change the current location (i.e., navigate to a different route) without relying solely on <Link> components. 
+This is particularly useful when you want to navigate based on certain conditions, such as after form submissions or event handling.
+
+
+
+
+
+
+
+
+
+

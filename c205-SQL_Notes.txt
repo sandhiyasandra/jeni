@@ -1,0 +1,369 @@
+18-11-2024
+-----------------------------------------------------------------------------------
+DDL--Data Definition Language
+
+Create
+Alter
+Drop
+Rename
+Truncate
+
+1.Create
+1.1 How to create a database?
+
+syntax:
+
+create database databasename;
+
+;---->end of the statement
+
+example:
+
+create database c205;
+
+1.2 how to select the database?
+
+syntax:
+
+use databasename;
+
+example
+
+use c205;
+
+1.3 Datatype
+
+It represent the type of data.
+
+Number
+   Int
+   Big int
+   Decimal
+
+String
+   char
+   varchar
+
+Date
+   date
+   datetime
+
+1.4 How to create a table?
+
+Syntax:
+
+create table tablename(
+column1name datatype,
+column2name datatype,
+column3name datatype,
+.....
+....
+column nth name datatype,
+);
+
+columnname=fieldname
+datatype=field type
+
+example:
+create table student(
+id int,
+name varchar(20),
+Dob date,
+Phone_number bigint
+);
+
+1.5 to list the database or table
+
+syntax
+
+show databases;
+show tables;
+
+1.6 To view the structure of the table
+
+syntax:
+desc tablename;
+
+start with desc---description
+end with desc----descending
+
+
+example:
+
+desc student;
+-----------------------------------------------------------------------------------
+19-11-2024
+
+2.1 How to insert a single row in a table?
+
+syntax:
+insert into tablename value(columnvalue1,columnvalue2,....);
+
+example:
+insert into student value(1,"Yogesh","2002-12-31",9898976561);
+
+
+2.2 How to insert a Multiple rows in a table?
+
+syntax:
+insert into tablename values(columnvalue1,columnvalue2,....),(columnvalue1,columnvalue2,....),(columnvalue1,columnvalue2,....),.....;
+
+example:
+insert into student value(2,"Tamizh","2003-03-07",9990976561),(3,"Ganesh","2003-03-12",9089786756),(4,"Deepa","2003-05-16",8765432109);
+
+2.3 How to insert a row to a  specific column?
+
+syntax:
+insert into tablename(columnname1,columnname...)values(columnvalue1,columnvalue2,....);
+
+example:
+insert into student(id,name) values(5,"Priya");
+
+2.4 How to retrive the data from a table?
+
+syntax:
+
+select columnname from tablename;
+
+select * from tablename;
+
+*--->all
+
+example:
+select * from student;
+
+select id,name from student;
+
+2.5 How to update a value from a table?
+
+Syntax:
+update tablename set column1name=value,columnname=value where condition;
+
+example
+
+update student set dob="1999-04-27",phone_number=9090909090 where id=5;
+
+set sql_safe_updates=0;
+
+2.6 to delete a particular row
+
+syntax:
+delete from tablename where condition;
+
+example:
+delete from student where id=3;
+
+2.7 to delete the entire data from a table
+
+syntax :
+
+truncate table tablename;
+
+example:
+
+truncate table student;
+
+2.8 to delete a table or database
+
+syntax
+
+drop table/database tablename/databasename;
+
+example
+
+drop table student; // table delete
+
+drop database c205;
+----------------------------------------------------------------------20-11-2024
+
+3.1 Constraint
+
+set of instruction given to a table is known as constraint
+
+6type
+
+Primary key--it is a combination of unique and not null but only one pk is allowed.
+
+Unique key--It doesnot allow duplicate value
+
+Not null--It should not be a null value
+
+Check---to check the condition
+
+Default---to set a default value
+
+Foreign key---It must be a pk in someother table
+
+3.2 how to add a constraint while creating a table.
+
+example:
+create table emp(
+id int primary key,
+name varchar(20) not null,
+age int,
+Phone_number big int unique,
+city varchar(20) default 'chennai',
+check(age>21)
+);
+
+
+3.3 how to add or remove constraint from a existing table.
+
+Primary key:
+remove:
+
+alter table tablename drop primary key;
+
+add:
+
+alter table tablename add primary key(columnname);
+
+Notnull:
+
+add:
+
+Alter table tablename modify columnname datatype not null;
+
+remove:
+
+Alter table tablename modify columnname datatype ;
+
+default:
+
+remove
+
+alter table tablename alter column columnname drop default;
+
+add
+
+alter table tablename alter column columnname set default value;
+
+unique
+
+remove
+
+alter table tablename drop index columnname;
+
+add
+
+alter table tablename add unique key(columnname);
+
+4.1 Operators
+
+It is a symbol used to perform some mathematical and logical operation.
+
+4.1.1 Arithmetic
++,-,*,/,//
+
+select name,age+1 as age from emp;
+
+update emp set age=age+1;
+
+4.1.2 Relational
+=,<,>,<=,>=,!=,<>
+
+4.1.3 Logical
+
+and or not
+
+select * from emp where not(city="salem" and age>25);
+
+4.1.4 range
+
+between and
+
+select * from emp where age between 25 and 27;
+
+4.1.5 List
+
+in, not in
+
+select * from emp where age not in (25,26);
+
+4.1.6Like 
+
+%
+_
+
+a%--starts with a
+%a--endswith a
+%a%--contains a
+_a%--second letter startswith a
+
+select * from emp where name like '__n%';
+----------------------------------------------------------------------
+21-11-2024
+
+5.1 distinct--select distinct(city) from emp;
+
+5.2 orderby--sorting
+
+select * from emp order by age desc;
+
+select * from emp order by age;
+
+5.3 limit-- select * from emp order by age desc limit 1;
+
+5.4 function()
+
+It is a block of statement which runs when it called.
+
+types
+
+Predefined--in built function--Math,String,Date,Aggregrate
+
+Aggregate function
+
+sum()
+avg()
+min()
+max()
+count()
+
+Math function
+
+ceil()
+floor()
+round()
+sqrt()
+pow()
+exp()
+abs()
+
+userdefined--
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
